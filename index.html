@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convertisseur Universel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    select, input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background: #00c6ff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0072ff;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Convertisseur Universel</h1>
+
+  <div class="container">
+    <input type="number" id="inputValue" placeholder="Valeur">
+
+    <select id="conversionType">
+      <option value="length">Longueur (m → km)</option>
+      <option value="weight">Poids (g → kg)</option>
+      <option value="temperature">Température (°C → °F)</option>
+    </select>
+
+    <br>
+
+    <button onclick="convert()">Convertir</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function convert() {
+      const value = parseFloat(document.getElementById("inputValue").value);
+      const type = document.getElementById("conversionType").value;
+      let result;
+
+      if (isNaN(value)) {
+        document.getElementById("result").innerText = "Entre une valeur valide";
+        return;
+      }
+
+      switch(type) {
+        case "length":
+          result = value / 1000 + " km";
+          break;
+        case "weight":
+          result = value / 1000 + " kg";
+          break;
+        case "temperature":
+          result = (value * 9/5) + 32 + " °F";
+          break;
+      }
+
+      document.getElementById("result").innerText = "Résultat : " + result;
+    }
+  </script>
+
+</body>
+</html>
